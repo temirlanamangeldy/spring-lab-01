@@ -36,4 +36,23 @@ public class HelloController {
             String javaVersion,
             int cpuCores
     ) {}
+    @GetMapping("/palindrome")
+    public PalindromeResult palindrome(
+            @RequestParam(defaultValue = "") String text) {
+
+        String cleaned = text.replaceAll("\\s+", "").toLowerCase();
+
+        String reversed = new StringBuilder(cleaned)
+                .reverse()
+                .toString();
+
+        boolean palindrome = cleaned.equals(reversed);
+
+        return new PalindromeResult(text, palindrome);
+    }
+
+    public record PalindromeResult(
+            String text,
+            boolean palindrome
+    ) { }
 }
