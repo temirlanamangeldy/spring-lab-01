@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Catalogue</title>
+
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+
+<body>
+
+<h1 th:text="${title}">Catalogue</h1>
+
+<div th:if="${message}" th:text="${message}"></div>
+
+<form method="get" action="/books">
+    <label>
+        Author:
+        <input type="text" name="author" th:value="${author}">
+    </label>
+
+    <button type="submit">Filter</button>
+</form>
+<h2>Add book</h2>
+
+<form method="post" action="/books">
+
+    <label>
+        Title:
+        <input type="text" name="title" required>
+    </label>
+
+    <br><br>
+
+    <label>
+        Author:
+        <input type="text" name="author" required>
+    </label>
+
+    <br><br>
+
+    <label>
+        Year:
+        <input type="number" name="year" required>
+    </label>
+
+    <br><br>
+
+    <button type="submit">Add book</button>
+
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.year}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
